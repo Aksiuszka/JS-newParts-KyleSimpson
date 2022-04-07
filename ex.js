@@ -39,11 +39,11 @@ function data2(){
 		aa:1, bb:2, cc:3, dd:4, ff:5, gg:6
 	};
 }
-let one, two;
-({
-	aa:one,
-	bb:two,
-}) = data2();
+// let one, two
+// ({
+// 	aa:one,
+// 	bb:two,
+// }) = data2();
 
 // nested object destructuring
 
@@ -120,3 +120,45 @@ function fakeAjax(url,cb) {
 		}
 	});
 }
+const string ="jestem sobie tekstem"
+const iterator = [...string];
+console.log(iterator);
+for(v of string){
+	console.log(v);
+}
+
+function* infinite() {
+    let index = 0;
+
+    while (index<101) {
+        yield index++;
+    }
+}
+const numbery = infinite();
+// should print 0..100 by 1s
+
+//or
+const numbers = {
+	*[Symbol.iterator]({
+		start = 0,
+		stop = 100,
+		step = 1,
+	} = {}) {
+		for (let num = start; num <= stop; num += step) {
+			yield num;
+		}
+	}
+};
+for (let num of numbers) {
+	console.log(num);
+}
+
+// should print 6..30 by 4s
+console.log(
+	`My lucky numbers are: ${
+	[...numbers[Symbol.iterator]({
+		start: 6,
+		stop: 30,
+		step: 4,
+	})]}`
+);
